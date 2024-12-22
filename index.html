@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer times</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #240165, #05001c);
+            direction: rtl;
+            font-family: Arial, sans-serif;
+        }
+        #city_name{
+            font-size: 100px;
+            color: white;
+            font-weight: 400;
+        }
+        .city_date {
+            color: white;
+            margin-right: 40px;
+        }
+        .card {
+            width: 12%;
+            height: 95%;
+            background-color: white;
+            font-size: 20px;
+            box-shadow: 0px 10px 5px rgb(0 0 0 / 30%);
+            margin-right: 40px;
+        }
+        .header{
+            background: linear-gradient(45deg, #5709ee, #7a37bf);
+        }
+
+        .header h1 {
+            font-weight: 400;
+            margin-right: 5px;
+        }
+
+        h1,h2,h3,h4,h5,h6 {
+            margin: 0px;
+        }
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .time{
+            font-size: 70px;
+        }
+        .select {
+            width: 300px; 
+            height: 40px; 
+            font-size: 25px; 
+            background: none; 
+            color: white; 
+            padding: 5px; 
+            border-radius: 10px; 
+            border: 2px solid #ccc; 
+            appearance: none; 
+            cursor: pointer;
+        }
+
+        .select option {
+            background-color: #444; 
+            color: white; 
+            font-size: 18px;
+        }
+
+
+        .select:hover {
+            border-color: #555; 
+           background-color: #222;
+        }
+
+        .select:focus {
+            outline: none; 
+            border-color: #f90; 
+        }
+
+        .period {
+        font-size: 0.5em; 
+        vertical-align: super; 
+        }
+
+        @media (max-width: 768px) {
+            #city_name {
+                font-size: 50px; 
+            }
+
+            .city_date h6 {
+                font-size: 20px; 
+            }
+
+            .center {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .card {
+                width: 80%; 
+                height: auto; 
+                flex-direction: column; 
+            }
+
+            .card h1 {
+                font-size: 1.2rem; 
+            }
+
+            .time {
+                font-size: 50px; 
+            }
+
+            .select {
+                width: 90%; 
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            #city_name {
+                font-size: 70px; 
+            }
+
+            .city_date h6 {
+                font-size: 30px; 
+            }
+
+            .card {
+                width: 45%; 
+            }
+
+            .time {
+                font-size: 60px; 
+            }
+
+            .select {
+                width: 70%;
+                font-size: 22px;
+            }
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div style="height: 100vh" >
+        <div style="margin-top: 60px;">
+            <div class="city_date" >
+                <h1 id="city_name">القاهرة</h1>
+                <h6 style="font-size: 40px; font-weight: 150;" id="date">السبت 21 ديسمبير </h6>
+            </div>
+            <hr style="margin: 0px 50px; border-color:#5200e1;">
+    
+            <div class="center"  style="height: 200px; margin-top: 80px; justify-content: space-around; " >
+                <div class="card">
+                    <div class="header">
+                        <h1>الفجر</h1>
+                    </div>
+                    <div class="bod center" style="height: 80%;">
+                        <h1 id="fajr">4:30</h1>
+                    </div>
+    
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h1 >الشروق</h1>
+                    </div>
+                    <div class="bod center" style="height: 80%;">
+                        <h1 id="sunrise">4:30</h1>
+                    </div>
+    
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h1 >الظهر</h1>
+                    </div>
+                    <div class="bod center" style="height: 80%;">
+                        <h1 id="dhuhr">4:30</h1>
+                    </div>
+    
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h1 >العصر</h1>
+                    </div>
+                    <div class="bod center" style="height: 80%;">
+                        <h1 id="asr">4:30</h1>
+                    </div>
+    
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h1 >المغرب</h1>
+                    </div>
+                    <div class="bod center" style="height: 80%;">
+                        <h1 id="maghrib">4:30</h1>
+                    </div>
+    
+                </div>
+                
+                <div class="card">
+                    <div class="header">
+                        <h1 >العشاء</h1>
+                    </div>
+                    <div class="bod center" style="height: 80%;">
+                        <h1 id="isha">4:30</h1>
+                    </div>
+    
+                </div>
+            </div>
+    
+            <div class="center" style="margin-top: 120px;" >
+                <select name="" id="cities" class="select" >
+                    
+                </select>
+            </div>
+            
+    
+        </div>
+    </div>
+    
+</body>
+<script src="./node_modules/axios/dist/axios.min.js"></script>
+<script>
+    let cities = [
+        {
+            arabicName: "القاهرة",
+            name: "Cairo"
+        },
+        {
+            arabicName: "الاسكندرية",
+            name: "Alexandria"
+        },
+        {
+            arabicName: "كفرالشيخ",
+            name: "Kafr El Sheikh"
+        },
+        {
+            arabicName: "الدقهلية",
+            name: "Dakahlia"
+        },
+        {
+            arabicName: "الجيزة",
+            name: "Giza"
+        },
+        {
+            arabicName: "اسوان",
+            name: "Aswan"
+        },
+        {
+            arabicName: "شمال سيناء",
+            name: "North Sinai"
+        },
+        {
+            arabicName: "البحر الاحمر",
+            name: "Red Sea"
+        },
+        {
+            arabicName: "الغربية",
+            name: "Gharbia"
+        },
+        {
+            arabicName: "الشرقية",
+            name: "Sharqia"
+        }
+    ]
+    for (let city of cities){
+        const content = `<option>${city.arabicName}<option>`
+        document.getElementById("cities").innerHTML += content
+    }
+
+    document.getElementById("cities").addEventListener("change",function (){
+        document.getElementById("city_name").innerHTML = this.value
+        let cityName = ""
+        for (let city of cities){
+            if (city.arabicName == this.value){
+                cityName = city.name
+                break;
+            }
+        }
+        if (cityName) {
+            getprayertimeofchange(cityName);
+        } else {
+            console.error("City name not found!");
+        }
+    })
+    
+
+    function getprayertimeofchange(cityname){
+        let params = {
+        country: "EG",
+        city: cityname
+        }
+        axios.get('http://api.aladhan.com/v1/timingsByCity', {
+            params: params
+            })
+
+        .then(function (response) {
+            const timings = response.data.data.timings
+            FillTimeforPrayer("fajr", timings.Fajr)
+            FillTimeforPrayer("sunrise", timings.Sunrise)
+            FillTimeforPrayer("dhuhr", timings.Dhuhr)
+            FillTimeforPrayer("asr", timings.Asr)
+            FillTimeforPrayer("maghrib", timings.Maghrib)
+            FillTimeforPrayer("isha", timings.Isha)
+
+            const readableDate = response.data.data.date.readable
+            const weekday = response.data.data.date.hijri.weekday.ar
+           
+            const date = weekday + " " + readableDate
+            document.getElementById("date").innerHTML = date
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+
+        // function FillTimeforPrayer(id, time){
+        // document.getElementById(id).innerHTML = time
+        // }
+        function convertTo12HourFormat(time) {
+        let [hours, minutes] = time.split(':').map(Number); 
+        let period = hours >= 12 ? 'PM' : 'AM'; 
+        hours = hours % 12 || 12; 
+        return `${hours}:${minutes.toString().padStart(2, '0')}<span class="period">${period}</span>`;
+        }
+        function FillTimeforPrayer(id, time) {
+            let convertedTime = convertTo12HourFormat(time); 
+            document.getElementById(id).innerHTML = convertedTime; 
+        }
+    }
+    
+    
+</script>
+</html>
