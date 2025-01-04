@@ -161,7 +161,7 @@
                         <h1>الفجر</h1>
                     </div>
                     <div class="bod center" style="height: 80%;">
-                        <h1 id="fajr">4:30</h1>
+                        <h1 id="fajr"></h1>
                     </div>
     
                 </div>
@@ -224,7 +224,7 @@
     </div>
     
 </body>
-<script src="./node_modules/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     let cities = [
         {
@@ -295,7 +295,7 @@
         country: "EG",
         city: cityname
         }
-        axios.get('http://api.aladhan.com/v1/timingsByCity', {
+        axios.get('https://api.aladhan.com/v1/timingsByCity', {
             params: params
             })
 
